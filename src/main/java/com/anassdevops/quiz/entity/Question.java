@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +29,7 @@ public class Question {
 	@Enumerated(EnumType.STRING)
 	private CorrectAnswer correctAnswer;
 	@ManyToOne
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Quiz quiz;
 }
 
