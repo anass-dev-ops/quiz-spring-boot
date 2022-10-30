@@ -2,16 +2,21 @@ package com.anassdevops.quiz.web;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anassdevops.quiz.entity.Category;
+import com.anassdevops.quiz.exception.NotFoundElementException;
 import com.anassdevops.quiz.service.CategoryService;
 
 import lombok.AllArgsConstructor;
@@ -26,9 +31,9 @@ public class CategoryRestController {
 	@GetMapping
 	public ResponseEntity<List<Category>> getCategories() throws Exception {
 		List<Category> categories = categoryService.getCategories();
-//		if(categories.isEmpty()) {
-//			throw new Exception("Is Not Empty");
-//		}
+		if(categories.isEmpty()) {
+			throw new NotFoundElementException(0L);
+		}
 		return new ResponseEntity<List<Category>>(categories, HttpStatus.OK);
 	}
 	
@@ -38,8 +43,18 @@ public class CategoryRestController {
 	}
 
 	@PostMapping
-	public String addCategory(@RequestBody Category category) {
-		categoryService.addCategory(category);
-		return "The Category Has Added Successfly";
+	public Category addCategory(@Valid @RequestBody Category category) {
+		return categoryService.addCategory(category);
+	}
+	
+	@PutMapping
+	public Category updateCategory(@RequestBody Category category) {
+		return categoryService.updateCategory(category);
+	}
+	
+	@DeleteMapping("/{id}")
+	public String deleteCategory(@PathVariable Long id) {
+		categoryService.deleteCategory(id);
+		return "The Category " + id + " Has Deleted Successfly";
 	}
 }

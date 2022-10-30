@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.anassdevops.quiz.entity.Category;
+import com.anassdevops.quiz.exception.NotFoundElementException;
 import com.anassdevops.quiz.repository.CategoryRepository;
 import com.anassdevops.quiz.service.CategoryService;
 
@@ -23,7 +24,7 @@ public class CategoryServiceImp implements CategoryService{
 
 	@Override
 	public Category getCategoryById(Long id) {
-		return categoryRepository.findById(id).get();
+		return categoryRepository.findById(id).orElseThrow(() -> new NotFoundElementException(id));
 	}
 
 	@Override
