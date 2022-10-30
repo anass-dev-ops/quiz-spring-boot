@@ -27,18 +27,18 @@ public class CategoryServiceImp implements CategoryService{
 	}
 
 	@Override
-	public void addCategory(Category category) {
-		categoryRepository.save(category);
+	public Category addCategory(Category category) {
+		return categoryRepository.save(category);
 	}
 
 	@Override
-	public void editCategory(Category category) {
-		
+	public Category updateCategory(Category category) {
+		return categoryRepository.save(category);
 	}
 
 	@Override
 	public void deleteCategory(Long id) {
-		
+		categoryRepository.deleteById(id);
 	}
 
 }
