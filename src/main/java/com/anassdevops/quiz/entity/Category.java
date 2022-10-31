@@ -1,5 +1,6 @@
 package com.anassdevops.quiz.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
+	@Column(unique = true)
 	private String name;
 	@Size(min = 3, max=200)
 	private String description;

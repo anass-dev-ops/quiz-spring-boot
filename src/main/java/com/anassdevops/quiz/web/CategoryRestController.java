@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anassdevops.quiz.entity.Category;
-import com.anassdevops.quiz.exception.NotFoundElementException;
 import com.anassdevops.quiz.service.CategoryService;
 
 import lombok.AllArgsConstructor;
@@ -31,30 +30,27 @@ public class CategoryRestController {
 	@GetMapping
 	public ResponseEntity<List<Category>> getCategories() throws Exception {
 		List<Category> categories = categoryService.getCategories();
-		if(categories.isEmpty()) {
-			throw new NotFoundElementException(0L);
-		}
 		return new ResponseEntity<List<Category>>(categories, HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public Category getCategoryById(@PathVariable Long id) {
-		return categoryService.getCategoryById(id);
+	public ResponseEntity<Category> getCategoryById(@PathVariable Long id) {
+		return new ResponseEntity<Category>(categoryService.getCategoryById(id), HttpStatus.OK) ;
 	}
 
 	@PostMapping
-	public Category addCategory(@Valid @RequestBody Category category) {
-		return categoryService.addCategory(category);
+	public ResponseEntity<Category> addCategory(@Valid @RequestBody Category category) {
+		return new ResponseEntity<Category>(categoryService.addCategory(category), HttpStatus.CREATED);
 	}
 	
 	@PutMapping
-	public Category updateCategory(@RequestBody Category category) {
-		return categoryService.updateCategory(category);
+	public ResponseEntity<Category> updateCategory(@RequestBody Category category) {
+		return new ResponseEntity<Category>(categoryService.updateCategory(category), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public String deleteCategory(@PathVariable Long id) {
+	public ResponseEntity<String> deleteCategory(@PathVariable Long id) {
 		categoryService.deleteCategory(id);
-		return "The Category " + id + " Has Deleted Successfly";
+		return new ResponseEntity<String>("The Category " + id + " Has Deleted Successfly", HttpStatus.OK);
 	}
 }
