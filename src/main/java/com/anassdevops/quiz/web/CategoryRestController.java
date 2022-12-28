@@ -1,11 +1,13 @@
 package com.anassdevops.quiz.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("api/categories")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class CategoryRestController {
 	
 	CategoryService categoryService;
@@ -48,9 +51,17 @@ public class CategoryRestController {
 		return new ResponseEntity<Category>(categoryService.updateCategory(category), HttpStatus.OK);
 	}
 	
+//	@DeleteMapping("/{id}")
+//	public ResponseEntity<String> deleteCategory(@PathVariable Long id) {
+//		categoryService.deleteCategory(id);
+//		return new ResponseEntity<String>("The Category " + id + " Has Deleted Successfly", HttpStatus.OK);
+//	}
+	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteCategory(@PathVariable Long id) {
+	public List<String> deleteCategory(@PathVariable Long id) {
+		List<String> res = new ArrayList<>();
 		categoryService.deleteCategory(id);
-		return new ResponseEntity<String>("The Category " + id + " Has Deleted Successfly", HttpStatus.OK);
+		res.add("The Category Has Deleted Successfly");
+		return res;
 	}
 }
