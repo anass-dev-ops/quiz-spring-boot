@@ -20,9 +20,10 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
-	@Column(unique = true)
+	@Column(name= "name", unique = true)
 	private String name;
 	@Size(min = 3, max=200)
+	@Column(name = "description")
 	private String description;
 
 }

@@ -10,6 +10,8 @@ import com.anassdevops.quiz.service.QuestionService;
 
 import lombok.AllArgsConstructor;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("api/questions")
 @AllArgsConstructor
@@ -29,7 +31,7 @@ public class QuestionRestController {
 	}
 
 	@PostMapping
-	Question addQuestion(@RequestBody QuestionDTO question) {
+	Question addQuestion(@Valid @RequestBody QuestionDTO question) {
 		return questionService.addQuestion(question);
 	}
 

@@ -2,12 +2,8 @@ package com.anassdevops.quiz.entity;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,8 +15,12 @@ public class Quiz {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Size(min = 3)
+	@Column(name = "title")
 	private String title;
+	@Column(name = "description")
 	private String description;
+	@Column(name = "details")
 	private String details;
 	@ManyToOne
 	private Category category;

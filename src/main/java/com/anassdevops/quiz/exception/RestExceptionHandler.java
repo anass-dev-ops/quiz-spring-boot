@@ -15,6 +15,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+
+//	@ExceptionHandler(Exception.class)
+//	public ResponseEntity<ExceptionModel> gHandlerException(Exception exception, WebRequest request) {
+//		ExceptionModel exceptionModel = new ExceptionModel(
+//				request.getDescription(false),
+//				exception.getLocalizedMessage(),
+//				LocalDateTime.now());
+//		return new ResponseEntity<>(exceptionModel, HttpStatus.INTERNAL_SERVER_ERROR);
+//	}
 	
 	@ExceptionHandler(GlobalException.class)
 	public ResponseEntity<ExceptionModel> handlerException(GlobalException globalException, WebRequest request) {
