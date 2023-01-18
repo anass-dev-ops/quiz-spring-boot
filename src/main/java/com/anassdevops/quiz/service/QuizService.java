@@ -8,7 +8,8 @@ import com.anassdevops.quiz.entity.Quiz;
 public interface QuizService {
 	
 	List<Quiz> getQuizzes();
-	
+	List<Quiz> getQuizzesByCategoryId(Long id);
+
 	Quiz addQuiz(QuizDTO quiz);
 
 }

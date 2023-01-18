@@ -26,6 +26,11 @@ public class QuizServiceImp implements QuizService{
 	}
 
 	@Override
+	public List<Quiz> getQuizzesByCategoryId(Long id) {
+		return quizRepository.findAllByCategoryId(id);
+	}
+
+	@Override
 	public Quiz addQuiz(QuizDTO quiz) {
 		Quiz q = new Quiz();
 		q.setDescription(quiz.getDescription());

@@ -25,7 +25,11 @@ public class QuizRestController {
 	public List<Quiz> getQuizzes() {
 		return quizService.getQuizzes();
 	}
-	
+	@GetMapping("/{id}")
+	public List<Quiz> getQuizzesByCategoryId(@PathVariable Long id) {
+		return quizService.getQuizzesByCategoryId(id);
+	}
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Quiz addQuiz(@Valid @RequestBody QuizDTO quiz) {

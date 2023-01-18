@@ -54,9 +54,19 @@ public class Application implements CommandLineRunner {
 		question.setOption4("print (\"Hello World\");");
 		question.setCorrectAnswer(CorrectAnswer.option2);
 		questionRepository.save(question);
+
+		Question question1 = new Question();
+		question1.setQuiz(qu);
+		question1.setDescription("How do you insert COMMENTS in Java code?");
+		question1.setOption1("// This is a comment");
+		question1.setOption2("/* This is a comment");
+		question1.setOption3("# This is a comment");
+		question1.setOption4("*/ This is a comment");
+		question1.setCorrectAnswer(CorrectAnswer.option1);
+		questionRepository.save(question1);
 		
 		
-		
+
 		
 	}
 	
