@@ -64,8 +64,36 @@ public class Application implements CommandLineRunner {
 		question1.setOption4("*/ This is a comment");
 		question1.setCorrectAnswer(CorrectAnswer.option1);
 		questionRepository.save(question1);
-		
-		
+
+		question1 = new Question();
+		question1.setQuiz(qu);
+		question1.setDescription("Which data type is used to create a variable that should store text?");
+		question1.setOption1("Txt");
+		question1.setOption2("string");
+		question1.setOption3("String");
+		question1.setOption4("myString");
+		question1.setCorrectAnswer(CorrectAnswer.option3);
+		questionRepository.save(question1);
+
+		question1 = new Question();
+		question1.setQuiz(qu);
+		question1.setDescription("How do you create a variable with the numeric value 5?");
+		question1.setOption1("x = 5;");
+		question1.setOption2("float x = 5;");
+		question1.setOption3("num x = 5");
+		question1.setOption4("int x = 5;");
+		question1.setCorrectAnswer(CorrectAnswer.option4);
+		questionRepository.save(question1);
+
+		question1 = new Question();
+		question1.setQuiz(qu);
+		question1.setDescription("How do you create a variable with the floating number 2.8?");
+		question1.setOption1("x = 2.8f;");
+		question1.setOption2("byte x = 2.8f");
+		question1.setOption3("float x = 2.8f;");
+		question1.setOption4("int x = 2.8f;");
+		question1.setCorrectAnswer(CorrectAnswer.option3);
+		questionRepository.save(question1);
 
 		
 	}
