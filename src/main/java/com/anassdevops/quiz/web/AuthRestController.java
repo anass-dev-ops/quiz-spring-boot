@@ -22,7 +22,6 @@ public class AuthRestController {
         return authService.addAppUser(appUserDto);
     }
 
-
     @GetMapping
     public List<AppUser> getUsers() {
         return authService.getAppUsers();
@@ -31,6 +30,11 @@ public class AuthRestController {
     @GetMapping("/user")
     public AppUser getUser(String username) {
         return authService.loadUserByUsername(username);
+    }
+
+    @GetMapping("/{id}")
+    public AppUser getUserById(@PathVariable Long id) {
+        return authService.getAppUserById(id);
     }
 
 }

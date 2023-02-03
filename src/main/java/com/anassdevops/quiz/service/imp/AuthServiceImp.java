@@ -60,6 +60,11 @@ public class AuthServiceImp implements AuthService {
     }
 
     @Override
+    public AppUser getAppUserById(Long id) {
+        return appUserRepository.findById(id).get();
+    }
+
+    @Override
     public AppUser loadUserByUsername(String username) {
         return appUserRepository.findAppUserByUsername(username);
     }

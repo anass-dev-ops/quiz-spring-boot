@@ -15,5 +15,6 @@ public interface AuthService {
     void addRoleToUser(String appRoleName, String appUserName);
 
     List<AppUser> getAppUsers();
+    AppUser getAppUserById(Long id);
     AppUser loadUserByUsername(String username);
 }
