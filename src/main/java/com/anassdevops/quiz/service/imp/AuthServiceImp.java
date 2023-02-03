@@ -1,7 +1,10 @@
 package com.anassdevops.quiz.service.imp;
 
+import com.anassdevops.quiz.dto.AppUserDto;
 import com.anassdevops.quiz.entity.AppRole;
 import com.anassdevops.quiz.entity.AppUser;
+import com.anassdevops.quiz.exception.ConfirmPassException;
+import com.anassdevops.quiz.exception.ConflictException;
 import com.anassdevops.quiz.repository.AppRoleRepository;
 import com.anassdevops.quiz.repository.AppUserRepository;
 import com.anassdevops.quiz.service.AuthService;
@@ -15,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -28,8 +32,13 @@ public class AuthServiceImp implements AuthService {
 
 
     @Override
-    public AppUser addAppUser(AppUser appUser) {
-        appUser.setPassword(bCryptPasswordEncoder.encode(appUser.getPassword()));
+    public AppUser addAppUser(AppUserDto appUserDto) throws Exception {
+        AppUser appUser = new AppUser();
+        appUser.setUsername(appUserDto.getUsername());
+        if(!Objects.equals(appUserDto.getPassword(), appUserDto.getConfirmPass())) {
+            throw new ConfirmPassException();
+        }
+        appUser.setPassword(bCryptPasswordEncoder.encode(appUserDto.getPassword()));
         return appUserRepository.save(appUser);
     }
 

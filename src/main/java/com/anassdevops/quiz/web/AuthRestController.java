@@ -1,5 +1,6 @@
 package com.anassdevops.quiz.web;
 
+import com.anassdevops.quiz.dto.AppUserDto;
 import com.anassdevops.quiz.entity.AppUser;
 import com.anassdevops.quiz.service.AuthService;
 import lombok.AllArgsConstructor;
@@ -10,19 +11,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/users")
 @AllArgsConstructor
 public class AuthRestController {
 
     private AuthService authService;
 
     @PostMapping
-    public String addAppUser(@RequestBody AppUserDto appUserDto) {
-        return "Hello From Here!";
+    public AppUser addAppUser(@RequestBody AppUserDto appUserDto) throws Exception {
+        return authService.addAppUser(appUserDto);
     }
 
 
-    @GetMapping("/users")
+    @GetMapping
     public List<AppUser> getUsers() {
         return authService.getAppUsers();
     }
@@ -34,11 +35,3 @@ public class AuthRestController {
 
 }
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-class AppUserDto {
-    private String username;
-    private String password;
-    private String confirmPass;
-}

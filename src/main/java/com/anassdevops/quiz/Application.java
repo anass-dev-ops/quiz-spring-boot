@@ -3,6 +3,7 @@ package com.anassdevops.quiz;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import com.anassdevops.quiz.dto.AppUserDto;
 import com.anassdevops.quiz.entity.*;
 import com.anassdevops.quiz.service.AuthService;
 import org.springframework.boot.CommandLineRunner;
@@ -100,9 +101,9 @@ public class Application implements CommandLineRunner {
 		question1.setCorrectAnswer(CorrectAnswer.option3);
 		questionRepository.save(question1);
 
-		AppUser appUser1 = new AppUser(null, "admin", "1234", new ArrayList<>());
-		AppUser appUser2 = new AppUser(null, "user1", "1234", new ArrayList<>());
-		AppUser appUser3 = new AppUser(null, "user2", "1234", new ArrayList<>());
+		AppUserDto appUser1 = new AppUserDto("admin", "1234", "1234");
+		AppUserDto appUser2 = new AppUserDto("user1", "1234", "1234");
+		AppUserDto appUser3 = new AppUserDto("user2", "1234", "1234");
 		authService.addAppUser(appUser1);
 		authService.addAppUser(appUser2);
 		authService.addAppUser(appUser3);
