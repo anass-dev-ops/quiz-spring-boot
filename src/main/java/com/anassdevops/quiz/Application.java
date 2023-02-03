@@ -1,20 +1,22 @@
 package com.anassdevops.quiz;
 
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import com.anassdevops.quiz.entity.*;
+import com.anassdevops.quiz.service.AuthService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.anassdevops.quiz.entity.Category;
-import com.anassdevops.quiz.entity.CorrectAnswer;
-import com.anassdevops.quiz.entity.Question;
-import com.anassdevops.quiz.entity.Quiz;
 import com.anassdevops.quiz.repository.CategoryRepository;
 import com.anassdevops.quiz.repository.QuestionRepository;
 import com.anassdevops.quiz.repository.QuizRepository;
 
 import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 @AllArgsConstructor
@@ -24,12 +26,15 @@ public class Application implements CommandLineRunner {
 	QuizRepository quizRepository;
 	QuestionRepository questionRepository;
 
+	AuthService authService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
+
 		Stream.of("Programming", "general Knowlegde", "Mathematic").forEach(c -> {
 			Category category = new Category();
 			category.setName(c);
@@ -95,7 +100,25 @@ public class Application implements CommandLineRunner {
 		question1.setCorrectAnswer(CorrectAnswer.option3);
 		questionRepository.save(question1);
 
-		
+		AppUser appUser1 = new AppUser(null, "admin", "1234", new ArrayList<>());
+		AppUser appUser2 = new AppUser(null, "user1", "1234", new ArrayList<>());
+		AppUser appUser3 = new AppUser(null, "user2", "1234", new ArrayList<>());
+		authService.addAppUser(appUser1);
+		authService.addAppUser(appUser2);
+		authService.addAppUser(appUser3);
+
+		AppRole appRole1 = new AppRole(null, "ADMIN", new ArrayList<>());
+		AppRole appRole2 = new AppRole(null, "USER", new ArrayList<>());
+		AppRole appRole3 = new AppRole(null, "CONSUMER", new ArrayList<>());
+		authService.addAppRole(appRole1);
+		authService.addAppRole(appRole2);
+		authService.addAppRole(appRole3);
+
+		authService.addRoleToUser("ADMIN","admin");
+		authService.addRoleToUser("USER","admin");
+		authService.addRoleToUser( "CONSUMER","admin");
+		authService.addRoleToUser("USER", "user1");
+		authService.addRoleToUser("USER", "user2");
 	}
 	
 	
