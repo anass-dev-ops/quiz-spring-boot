@@ -17,7 +17,7 @@ import com.anassdevops.quiz.repository.QuizRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 @SpringBootApplication
 @AllArgsConstructor
@@ -29,9 +29,16 @@ public class Application implements CommandLineRunner {
 
 	AuthService authService;
 
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
+
+
 
 	@Override
 	public void run(String... args) throws Exception {
