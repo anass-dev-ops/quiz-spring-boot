@@ -3,6 +3,7 @@ package com.anassdevops.quiz.web;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.anassdevops.quiz.dto.QuizDTO;
@@ -32,6 +33,7 @@ public class QuizRestController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	//@PostAuthorize("hasAuthority('USER')")
 	public Quiz addQuiz(@Valid @RequestBody QuizDTO quiz) {
 		return quizService.addQuiz(quiz);
 	}

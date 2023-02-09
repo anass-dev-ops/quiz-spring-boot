@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,11 +43,13 @@ public class CategoryRestController {
 	}
 
 	@PostMapping
+	//@PostAuthorize("hasAuthority('USER')")
 	public ResponseEntity<Category> addCategory(@Valid @RequestBody Category category) {
 		return new ResponseEntity<Category>(categoryService.addCategory(category), HttpStatus.CREATED);
 	}
 	
 	@PutMapping
+	//@PostAuthorize("hasAuthority('USER')")
 	public ResponseEntity<Category> updateCategory(@RequestBody Category category) {
 		return new ResponseEntity<Category>(categoryService.updateCategory(category), HttpStatus.OK);
 	}
@@ -58,6 +61,7 @@ public class CategoryRestController {
 //	}
 	
 	@DeleteMapping("/{id}")
+	//@PostAuthorize("hasAuthority('USER')")
 	public List<String> deleteCategory(@PathVariable Long id) {
 		List<String> res = new ArrayList<>();
 		categoryService.deleteCategory(id);
