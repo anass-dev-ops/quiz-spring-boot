@@ -1,4 +1,4 @@
-package com.anassdevops.quiz.entity;
+package com.anassdevops.quiz.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

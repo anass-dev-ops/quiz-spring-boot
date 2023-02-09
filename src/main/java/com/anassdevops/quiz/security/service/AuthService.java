@@ -1,8 +1,8 @@
-package com.anassdevops.quiz.service;
+package com.anassdevops.quiz.security.service;
 
-import com.anassdevops.quiz.dto.AppUserDto;
-import com.anassdevops.quiz.entity.AppRole;
-import com.anassdevops.quiz.entity.AppUser;
+import com.anassdevops.quiz.security.dto.AppUserDto;
+import com.anassdevops.quiz.security.entity.AppRole;
+import com.anassdevops.quiz.security.entity.AppUser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

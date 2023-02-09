@@ -3,9 +3,10 @@ package com.anassdevops.quiz;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import com.anassdevops.quiz.dto.AppUserDto;
+import com.anassdevops.quiz.security.dto.AppUserDto;
 import com.anassdevops.quiz.entity.*;
-import com.anassdevops.quiz.service.AuthService;
+import com.anassdevops.quiz.security.entity.AppRole;
+import com.anassdevops.quiz.security.service.AuthService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,11 +17,13 @@ import com.anassdevops.quiz.repository.QuizRepository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @SpringBootApplication
 @AllArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class Application implements CommandLineRunner {
 	
 	CategoryRepository categoryRepository;

@@ -1,5 +1,6 @@
-package com.anassdevops.quiz.security;
+package com.anassdevops.quiz.security.filter;
 
+import com.anassdevops.quiz.security.SecurityUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,7 +25,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private AuthenticationManager authenticationManager;
 
-    JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
@@ -41,19 +42,19 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        System.out.println("successfulAuthentication");
+
         User user = (User) authResult.getPrincipal();
-        Algorithm algorithm = Algorithm.HMAC256("mySecret1234");
+        Algorithm algorithm = Algorithm.HMAC256(SecurityUtil.SECRET);
         String jwtAccessToken = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis()+5*60*1000))
+                .withExpiresAt(new Date(System.currentTimeMillis()+SecurityUtil.ACCESS_TOKEN_DURATION))
                 .withIssuer(request.getRequestURI().toString())
                 .withClaim("roles", user.getAuthorities().stream().map(ga->ga.getAuthority()).collect(Collectors.toList()))
                 .sign(algorithm);
 
         String jwtRefreshToken = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis()+15*60*1000))
+                .withExpiresAt(new Date(System.currentTimeMillis()+SecurityUtil.REFRESH_TOKEN_DURATION))
                 .withIssuer(request.getRequestURI().toString())
                 .sign(algorithm);
 

@@ -1,11 +1,10 @@
-package com.anassdevops.quiz.web;
+package com.anassdevops.quiz.security.web;
 
-import com.anassdevops.quiz.dto.AppUserDto;
-import com.anassdevops.quiz.entity.AppUser;
-import com.anassdevops.quiz.service.AuthService;
+import com.anassdevops.quiz.security.dto.AppUserDto;
+import com.anassdevops.quiz.security.entity.AppUser;
+import com.anassdevops.quiz.security.service.AuthService;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,16 +12,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @AllArgsConstructor
-public class AuthRestController {
+public class UserRestController {
 
     private AuthService authService;
 
     @PostMapping
+    @PostAuthorize("hasAuthority('ADMIN')")
     public AppUser addAppUser(@RequestBody AppUserDto appUserDto) throws Exception {
         return authService.addAppUser(appUserDto);
     }
 
     @GetMapping
+    @PostAuthorize("hasAuthority('USER')")
     public List<AppUser> getUsers() {
         return authService.getAppUsers();
     }
@@ -38,4 +39,3 @@ public class AuthRestController {
     }
 
 }
-

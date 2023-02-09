@@ -1,4 +1,4 @@
-package com.anassdevops.quiz.entity;
+package com.anassdevops.quiz.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
 
 @Data

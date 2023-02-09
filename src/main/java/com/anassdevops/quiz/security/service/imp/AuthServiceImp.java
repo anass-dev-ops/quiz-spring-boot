@@ -1,18 +1,17 @@
-package com.anassdevops.quiz.service.imp;
+package com.anassdevops.quiz.security.service.imp;
 
-import com.anassdevops.quiz.dto.AppUserDto;
-import com.anassdevops.quiz.entity.AppRole;
-import com.anassdevops.quiz.entity.AppUser;
+import com.anassdevops.quiz.security.dto.AppUserDto;
+import com.anassdevops.quiz.security.entity.AppRole;
+import com.anassdevops.quiz.security.entity.AppUser;
 import com.anassdevops.quiz.exception.ConfirmPassException;
-import com.anassdevops.quiz.repository.AppRoleRepository;
-import com.anassdevops.quiz.repository.AppUserRepository;
-import com.anassdevops.quiz.service.AuthService;
+import com.anassdevops.quiz.security.repository.AppRoleRepository;
+import com.anassdevops.quiz.security.repository.AppUserRepository;
+import com.anassdevops.quiz.security.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 

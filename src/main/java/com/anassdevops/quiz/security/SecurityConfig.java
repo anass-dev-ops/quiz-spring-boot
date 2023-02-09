@@ -1,7 +1,9 @@
 package com.anassdevops.quiz.security;
 
-import com.anassdevops.quiz.entity.AppUser;
-import com.anassdevops.quiz.service.AuthService;
+import com.anassdevops.quiz.security.entity.AppUser;
+import com.anassdevops.quiz.security.filter.JwtAuthenticationFilter;
+import com.anassdevops.quiz.security.filter.JwtAuthorizationFilter;
+import com.anassdevops.quiz.security.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,10 +58,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // http.cors().disable();
         http.headers().frameOptions().disable();
 
-        http.authorizeHttpRequests().antMatchers("/h2-console/**").permitAll();
+        http.authorizeHttpRequests().antMatchers("/h2-console/**", "/api/questions/quizzes/**").permitAll();
+        http.authorizeHttpRequests().antMatchers("/refreshToken/**").permitAll();
         http.authorizeHttpRequests().antMatchers("/api/categories").permitAll();
         // http.authorizeHttpRequests().antMatchers("/api/quizzes").permitAll();
-        http.authorizeHttpRequests().antMatchers("/api/questions/quizzes/**").permitAll();
+        http.authorizeHttpRequests().antMatchers().permitAll();
+        //http.authorizeHttpRequests().antMatchers(HttpMethod.POST, "/api/users/**").hasAuthority("ADMIN");
+        //http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/users/**").hasAuthority("UESR");
         http.authorizeHttpRequests().anyRequest().authenticated();
 
         http.addFilter(new JwtAuthenticationFilter(authenticationManagerBean()));

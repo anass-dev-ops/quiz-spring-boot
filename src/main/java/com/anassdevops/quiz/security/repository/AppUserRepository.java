@@ -1,6 +1,6 @@
-package com.anassdevops.quiz.repository;
+package com.anassdevops.quiz.security.repository;
 
-import com.anassdevops.quiz.entity.AppUser;
+import com.anassdevops.quiz.security.entity.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

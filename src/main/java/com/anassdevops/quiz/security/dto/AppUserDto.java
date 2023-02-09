@@ -1,4 +1,4 @@
-package com.anassdevops.quiz.dto;
+package com.anassdevops.quiz.security.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
